@@ -1,16 +1,16 @@
 app = angular.module 'myApp',[]
 
 cms = [ { 'zones': 'main': 'widgets': [
-  2:{
-    'type': 'headline-directive'
+  1:{
+    'type': 'headline'
     'contents':
-      'editable': 'h1-editable': 'Hello World'
+      'editable': 'Hello World'
       'nested-widgets': {}
   }
-  1: {
-    'type': 'paragraph-directive'
+  2: {
+    'type': 'paragraph'
     'contents':
-      'editable': 'p-editable': 'lorem ipsum dolor sit.'
+      'editable': 'lorem ipsum dolor sit.'
       'nested-widgets': {}
   }
 ] } ]
@@ -26,12 +26,16 @@ class BaseController
 app.controller 'BaseController', ['$scope', BaseController]
 
 app.directive 'headlineDirective', [ ->
-  template: '<h1>{{val}}</h1>'
+  scope:
+    text: '=text'
+  templateUrl: 'js/templates/h1-widget.html'
   restrict: 'A'
 ]
 
 app.directive 'paragraphDirective', [ ->
-  template: '<p>{{val}}</p>'
+  scope:
+    text: '=text'
+  templateUrl: 'js/templates/p-widget.html'
   restrict: 'A'
 ]
 

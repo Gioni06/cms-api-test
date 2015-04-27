@@ -1,8 +1,10 @@
 extends layout
 
 block content
-  div#main(ng-app="myApp" ng-controller="BaseController")
-    div(main-directive ng-repeat="zone in zones")
+  div#main(ng-app="myApp" ng-controller="BaseController" class="row")
+    div(main-directive ng-repeat="zone in zones" class="col-xs-12")
       div(ng-repeat="(key,val) in zone.widgets")
         div(ng-repeat="(k,widget) in val |orderBy:k")
-          div({{widget.type}})
+          div(ng-switch="widget.type")
+            div(ng-switch-when="headline" headline-directive data-text="widget.contents.editable")
+            div(ng-switch-when="paragraph" paragraph-directive data-text="widget.contents.editable")
