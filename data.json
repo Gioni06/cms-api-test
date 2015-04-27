@@ -1,0 +1,28 @@
+[
+  "zones":[
+    "main": [
+      "widgets":[
+        {
+          "type": "headline",
+          "order": 1,
+          "contents": [
+              "editable": [
+                "h1-editable" : "Hello World"
+              ],
+              "nested_widgets":[]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "order": 2,
+          "contents":[
+            "editable": [
+              "p-editable": "Lorem Ipsum Dolor Sit Ament."
+            ],
+            "nested_widgets": []
+          ]
+        }
+      ]
+    ]
+  ]
+]
