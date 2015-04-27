@@ -5,13 +5,24 @@ cms = [ { 'zones': 'main': 'widgets': [
     'type': 'headline'
     'contents':
       'editable': 'Hello World'
-      'nested-widgets': {}
+      'nested_widgets': {}
   }
-  2: {
+  3: {
     'type': 'paragraph'
     'contents':
       'editable': 'lorem ipsum dolor sit.'
-      'nested-widgets': {}
+      'nested_widgets': {}
+  }
+  2:{
+    'type' : 'panel'
+    'contents':
+      'editable': "The Title"
+      'nested_widgets':1:{
+        'type': 'paragraph'
+        'contents':
+          'editable': 'Das ist genesteter Content'
+          'nested-widgets': {}
+      }
   }
 ] } ]
 
@@ -43,4 +54,12 @@ app.directive 'mainDirective', [ ->
   template: '<div ng-transclude></div>'
   restrict: 'A'
   transclude: true
+]
+
+app.directive 'panelDirective', [ ->
+  scope:
+    text: '=text'
+    include: '=include'
+  templateUrl: 'js/templates/panel-widget.html'
+  restrict: 'A'
 ]

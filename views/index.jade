@@ -8,3 +8,4 @@ block content
           div(ng-switch="widget.type")
             div(ng-switch-when="headline" headline-directive data-text="widget.contents.editable")
             div(ng-switch-when="paragraph" paragraph-directive data-text="widget.contents.editable")
+            div(ng-switch-when="panel" panel-directive data-text="widget.contents.editable" data-include="widget.contents.nested_widgets")
