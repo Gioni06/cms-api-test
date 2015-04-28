@@ -2,10 +2,9 @@ extends layout
 
 block content
   div#main(ng-app="myApp" ng-controller="BaseController" class="row")
-    div(main-directive ng-repeat="zone in zones" class="col-xs-12")
-      div(ng-repeat="(key,val) in zone.widgets")
-        div(ng-repeat="(k,widget) in val |orderBy:k")
-          div(ng-switch="widget.type")
-            div(ng-switch-when="headline" headline-directive data-text="widget.contents.editable")
-            div(ng-switch-when="paragraph" paragraph-directive data-text="widget.contents.editable")
-            div(ng-switch-when="panel" panel-directive data-text="widget.contents.editable" data-include="widget.contents.nested_widgets")
+    div(main-directive ng-repeat="zone in zones" class="col-xs-12" ng-init="currentZone = Utils.keys(zones).toString()" data-allow-transform="true")
+      div(ng-repeat="widget in zone.widgets")
+          div(ng-switch="widget.type" ng-init="widget.index = $index; widget.zone = currentZone")
+            div(ng-switch-when="headline"   headline-directive data-text="widget.contents.editable")
+            div(ng-switch-when="paragraph"  paragraph-directive data-text="widget.contents.editable")
+            div(ng-switch-when="panel"      panel-directive data-text="widget.contents.editable" data-include="widget.contents.nested_widgets")

@@ -1,38 +1,60 @@
-app = angular.module 'myApp',[]
+
+
+app = angular.module('myApp',['ngDraggable']).run ($rootScope) ->
+  $rootScope.Utils =
+    keys: Object.keys
+
 
 cms = [ { 'zones': 'main': 'widgets': [
-  1:{
+  {
     'type': 'headline'
     'contents':
       'editable': 'Hello World'
       'nested_widgets': {}
-  }
-  3: {
+  },
+  {
+    'type' : 'panel'
+    'contents':
+      'editable': "The Title"
+      'nested_widgets': [
+        {
+          'type': 'paragraph'
+          'contents':
+            'editable': 'lorem ipsum dolor sit.'
+            'nested_widgets': [{}]
+        }
+      ]
+  },
+  {
     'type': 'paragraph'
     'contents':
       'editable': 'lorem ipsum dolor sit.'
       'nested_widgets': {}
   }
-  2:{
-    'type' : 'panel'
-    'contents':
-      'editable': "The Title"
-      'nested_widgets':1:{
-        'type': 'paragraph'
-        'contents':
-          'editable': 'Das ist genesteter Content'
-          'nested-widgets': {}
-      }
-  }
 ] } ]
 
+
 class BaseController
-  constructor: (@$scope = $scope) ->
-    @$scope.data = cms[0]
-    @$scope.zones = $scope.data.zones
-    console.log @$scope.zones
-
-
+  constructor: ($scope) ->
+    $scope.data = cms[0]
+    $scope.zones = $scope.data.zones
+    $scope.widgets = $scope.zones.widgets
+    $scope.onDropComplete = ($data, $event) ->
+      # console.log "the curren zone: " + $data.zone
+      # console.log "the curren index: " + $data.index
+      console.log "ON DROP"
+      console.log $data
+      console.log $event.event.target
+    $scope.onDragSucess = ($data, $event) ->
+      console.log "ON DRAG"
+      console.log $data
+      console.log $event.target
+      # console.log Object.keys($scope.zones).toString()
+      # console.log cms
+    $scope.onClick = ($index) ->
+      constructor: (@$scope = $scope)
+      $index--
+      $scope.$digest
 
 app.controller 'BaseController', ['$scope', BaseController]
 
